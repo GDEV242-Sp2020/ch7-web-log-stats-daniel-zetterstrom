@@ -154,8 +154,9 @@ public class LogfileReader implements Iterator<LogEntry>
         LogfileCreator creator = new LogfileCreator();
         // How many simulated entries we want.
         int numEntries = 100;
+        int year = 2016;
         for(int i = 0; i < numEntries; i++) {
-            data.add(creator.createEntry());
+            data.add(creator.createEntry(year));
         }
     }
 }

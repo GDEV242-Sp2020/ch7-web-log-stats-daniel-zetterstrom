@@ -25,18 +25,22 @@ public class LogfileCreator
      * @param numEntries How many entries.
      * @return true if successful, false otherwise.
      */
-    public boolean createFile(String filename, int numEntries)
+    public boolean createFile(String filename, int numEntriesPerYear)
     {
         boolean success = false;
         
-        if(numEntries > 0) {
+        if(numEntriesPerYear > 0) {
             try (FileWriter writer = new FileWriter(filename)) {
-                LogEntry[] entries = new LogEntry[numEntries];
-                for(int i = 0; i < numEntries; i++) {
-                    entries[i] = createEntry();
+                LogEntry[] entries = new LogEntry[numEntriesPerYear * 4];
+                int j = 0;
+                for(int year = 2016; year < 2020; year++){
+                    for(int i = 0; i < numEntriesPerYear; i++) {
+                        entries[i + (j * 100)] = createEntry(year);
+                    }
+                    j++;
                 }
                 Arrays.sort(entries);
-                for(int i = 0; i < numEntries; i++) {
+                for(int i = 0; i < (numEntriesPerYear * 4); i++) {
                     writer.write(entries[i].toString());
                     writer.write('\n');
                 }
@@ -55,9 +59,8 @@ public class LogfileCreator
      * Create a single (random) entry for a log file.
      * @return A log entry containing random data.
      */
-    public LogEntry createEntry()
+    public LogEntry createEntry(int year)
     {
-        int year = 2016;
         int month = 1 + rand.nextInt(12);
         // Avoid the complexities of days-per-month.
         int day = 1 + rand.nextInt(28);

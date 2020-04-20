@@ -63,6 +63,14 @@ public class LogEntry implements Comparable<LogEntry>
         setWhen();
     }
     
+    public int getMonth(){
+        return dataValues[MONTH];
+    }
+    
+    public int getYear(){
+        return dataValues[YEAR];
+    }
+    
     /**
      * Return the hour.
      * @return The hour field from the log line.
@@ -79,6 +87,10 @@ public class LogEntry implements Comparable<LogEntry>
     public int getMinute()
     {
         return dataValues[MINUTE];
+    }
+    
+    public int getDay(){
+        return dataValues[DAY];
     }
     
     /**
